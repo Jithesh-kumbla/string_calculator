@@ -11,6 +11,11 @@ class StringCalculator
       numbers = parts[1]
     end
 
-    numbers.split(/#{delimiter}/).map(&:to_i).sum
+    delimiter_escaped_numbers = numbers.split(/#{delimiter}/).map(&:to_i)
+    negatives = delimiter_escaped_numbers.select(&:negative?)
+
+    raise "negative numbers not allowed: #{negatives.join(', ')}" if negatives.any?
+
+    delimiter_escaped_numbers.sum
   end
 end
