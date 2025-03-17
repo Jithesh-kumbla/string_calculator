@@ -15,6 +15,7 @@ RSpec.describe ::StringCalculator do
 
     it 'should handle any amount of numbers that is passed as a string' do
       expect(StringCalculator.new.add("1,2,3")).to eq 6
+      expect(StringCalculator.new.add("1,5")).to eq 6
     end
   end
 end
