@@ -4,19 +4,28 @@ class StringCalculator
   def add(numbers)
     return 0 if numbers.empty?
 
-    delimiter = /,|\n/
-    if numbers.start_with?('//')
-      parts = numbers.split("\n", 2)
-      delimiter = Regexp.escape(parts[0][2..]) # can use delete_prefix or many more..
-      numbers = parts[1]
-    end
+    delimiter, numbers = extract_delimiter(numbers)
+    num_list = numbers.split(/#{delimiter}|\n/).map(&:to_i)
 
-    delimiter_escaped_numbers = numbers.split(/#{delimiter}/).map(&:to_i)
-    negatives = delimiter_escaped_numbers.select(&:negative?)
-
+    negatives = num_list.select(&:negative?)
     raise "negative numbers not allowed: #{negatives.join(', ')}" if negatives.any?
 
-    delimiter_escaped_numbers.reject! { |n| n > 1000 }
-    delimiter_escaped_numbers.sum
+    num_list.reject { |num| num > 1000 }.sum
+  end
+
+  private
+
+  def extract_delimiter(numbers)
+    if numbers.start_with?("//")
+      parts = numbers.split("\n", 2) 
+      delimiters = parts[0][2..]      # Extract everything after "//"
+
+      # Handle multiple delimiters: "//[***][%%]\n1***2%%3"
+      delimiter_list = delimiters.scan(/\[([^\]]+)\]|([^,])?/).flatten.compact
+      escaped_delimiters = delimiter_list.map { |d| Regexp.escape(d) }.join("|")
+
+      return escaped_delimiters, parts[1]
+    end
+    [",", numbers]  # Default delimiter is ","
   end
 end
