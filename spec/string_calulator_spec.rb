@@ -13,7 +13,9 @@ RSpec.describe ::StringCalculator do
     include_examples 'string calculator', '1,5', 6
     include_examples 'string calculator', "1\n2,3", 6
     include_examples 'string calculator', "//;\n1;2", 3
-
+    include_examples 'string calculator', "2, 1001", 2
+    
+    # include_examples 'negative number handler'
     # it 'should return 0 when an empty string is passed' do
     #   expect(StringCalculator.new.add('')).to eq 0
     # end
@@ -35,16 +37,17 @@ RSpec.describe ::StringCalculator do
     #   expect(StringCalculator.new.add("//;\n1;2")).to eq 3
     # end
 
+
     context 'handle negative numbers' do
       it 'will raise exception when included' do
         expect { StringCalculator.new.add('1,-2,3') }.to raise_error(RuntimeError, 'negative numbers not allowed: -2')
       end
     end
 
-    context 'ignore numbers > 1000' do
-      it 'should ignore when imput is greater than 1000' do
-        expect(StringCalculator.new.add("2, 1001")).to eq 2
-      end
-    end
+    # context 'ignore numbers > 1000' do
+    #   it 'should ignore when imput is greater than 1000' do
+    #     expect(StringCalculator.new.add("2, 1001")).to eq 2
+    #   end
+    # end
   end
 end
