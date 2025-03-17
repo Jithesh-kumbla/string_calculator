@@ -40,5 +40,11 @@ RSpec.describe ::StringCalculator do
         expect { StringCalculator.new.add('1,-2,3') }.to raise_error(RuntimeError, 'negative numbers not allowed: -2')
       end
     end
+
+    context 'ignore numbers > 1000' do
+      it 'should ignore when imput is greater than 1000' do
+        expect(StringCalculator.new.add("2, 1001")).to eq 2
+      end
+    end
   end
 end
