@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 class StringCalculator
-
-	def add(numbers)
-
-	end
+  def add(numbers)
+    0 if numbers.empty?
+  end
 end
