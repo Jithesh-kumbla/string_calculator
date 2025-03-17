@@ -12,5 +12,9 @@ RSpec.describe ::StringCalculator do
     it 'should return the number itself when a single number is provided' do
       expect(StringCalculator.new.add('1')).to eq 1
     end
+
+    it 'should handle any amount of numbers that is passed as a string' do
+      expect(StringCalculator.new.add("1,2,3")).to eq 6
+    end
   end
 end
