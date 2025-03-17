@@ -4,7 +4,7 @@ require 'rspec'
 require_relative '../services/string_calculator'
 require 'support/shared_examples/string_calculator_shared_examples'
 
-RSpec.describe ::StringCalculator do
+RSpec.describe StringCalculator do
   subject { described_class.new }
   describe '#add' do
     include_examples 'string calculator', '', 0
