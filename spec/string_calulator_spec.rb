@@ -14,6 +14,7 @@ RSpec.describe ::StringCalculator do
     include_examples 'string calculator', "1\n2,3", 6
     include_examples 'string calculator', "//;\n1;2", 3
     include_examples 'string calculator', "2, 1001", 2
+    include_examples 'string calculator', "//[*][%]\n1*2%3", 6
     
     # include_examples 'negative number handler'
     # it 'should return 0 when an empty string is passed' do
