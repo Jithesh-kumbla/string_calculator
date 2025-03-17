@@ -16,6 +16,7 @@ class StringCalculator
 
     raise "negative numbers not allowed: #{negatives.join(', ')}" if negatives.any?
 
+    delimiter_escaped_numbers.reject! { |n| n > 1000 }
     delimiter_escaped_numbers.sum
   end
 end
